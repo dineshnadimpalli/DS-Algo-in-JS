@@ -120,17 +120,17 @@ class WeightedGraph {
       previous[vertex] = null;
     }
 
-    console.log("---distances-----", distances);
-    console.log("------previous-----", previous);
-    console.log("---nodes-----", nodes);
+    // console.log("---distances-----", distances);
+    // console.log("------previous-----", previous);
+    // console.log("---nodes-----", nodes);
 
     while (nodes.values.length > 0) {
       smallest = nodes.dequeue().value;
-      console.log("---smallest-----", smallest);
+      // console.log("---smallest-----", smallest);
       if (smallest === finish) {
         // We are done
-        console.log("---distances-----", distances);
-        console.log("------previous-----", previous);
+        // console.log("---distances-----", distances);
+        // console.log("------previous-----", previous);
         while (previous[smallest]) {
           path.push(smallest);
           smallest = previous[smallest];
@@ -149,12 +149,17 @@ class WeightedGraph {
             distances[nextNeighbour] = candidate;
             //updating previous - how we got to neighbour
             previous[nextNeighbour] = smallest;
+            // console.log("-----nextNeighbour, candidate------", nextNeighbour, candidate)
             //enqueue in priority queue with new priority
             nodes.enqueue(nextNeighbour, candidate);
+            // console.log("------nodes-----", nodes);
+
           }
         }
       }
     }
+
+    // console.log("------nodes-----", nodes);
     return path.concat(smallest).reverse();
   }
 }
@@ -176,6 +181,7 @@ graph.addEdge("D", "E", 3);
 graph.addEdge("D", "F", 1);
 graph.addEdge("E", "F", 1);
 
-console.log(graph.Dijkstra("B", "F"));
+// console.log(graph)
+console.log(graph.Dijkstra("A", "F"));
 
 // ["A", "C", "D", "F", "E"]
